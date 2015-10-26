@@ -1,0 +1,4 @@
+*.swp
+index.yaml
+*.iml
+node_modules/
