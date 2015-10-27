@@ -10,12 +10,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body class="blue-grey lighten-2" ng-cloak>
+<!--class="blue-grey lighten-2"-->
+<body ng-cloak>
 
   <div class="container">
 
     <div class="row" ng-controller="ItemController">
-      <input type="text" ng-model="newItem.title">
+      
+      <form class="col s12" novalidate>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="item-title" placeholder="let's do something" type="text" class="validate"
+              ng-model="newItem.title">
+            <label for="item-title">Add an item</label>
+          </div>
+        </div>
+      
+      
       <a class="waves-effect waves-light btn"
          ng-click="createItem(newItem)">Create</a>
          
