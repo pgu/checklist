@@ -1,5 +1,7 @@
 *.swp
 *.un~
-index.yaml
 *.iml
+.DS_Store
+index.yaml
 node_modules/
+

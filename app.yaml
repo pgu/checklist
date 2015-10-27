@@ -14,6 +14,8 @@ handlers:
   static_dir: static/js
 - url: /styles
   static_dir: static/styles
+- url: /images
+  static_dir: static/images
 
 - url: /.*
   script: _go_app
