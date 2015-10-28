@@ -11,8 +11,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
-<!--class="blue-grey lighten-2"-->
-
 <body layout="column" ng-cloak>
 
 <div layout="column" ng-controller="ItemController">
@@ -35,7 +33,7 @@
       </md-input-container>
 
       <md-button class="md-fab md-primary md-button" aria-label="Add an item"
-                 style="float: right"
+                 style="float: right; margin-right: 21px;"
                  ng-disabled="itemForm.$invalid || isSaving"
                  ng-click="createItem(newItem, itemForm, items)">
         <md-icon md-font-library="material-icons">save</md-icon>
