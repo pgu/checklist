@@ -29,8 +29,9 @@
 
       return $http.get('/items/')
         .then(function (response) {
-          console.log(response);
-          $scope.items = response.data;
+          
+          var items = response.data;
+          $scope.items = _.sortBy(items, 'title');
         });
 
     }
