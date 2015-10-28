@@ -25,9 +25,6 @@
     "angular": false,
     "_": false,
     "moment": false,
-    "$": false,
-    "Stripe": false,
-    "ngGridFlexibleHeightPlugin": false,
-    "JSZip": false
+    "$": false
   }
 }

@@ -2,6 +2,7 @@
 *.un~
 *.iml
 .DS_Store
-index.yaml
+.idea
 node_modules/
+bower_components/
 
