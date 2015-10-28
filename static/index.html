@@ -3,6 +3,8 @@
 
 <head>
   <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <link rel="stylesheet" href="./styles/main.css">
   <link rel="stylesheet" href="./bower_components/angular-material/angular-material.min.css">
 
@@ -11,30 +13,38 @@
 
 <!--class="blue-grey lighten-2"-->
 
-<body ng-cloak>
+<body layout="column" ng-cloak>
 
-<div>
+<div layout="column" ng-controller="ItemController">
 
-  <div ng-controller="ItemController">
-    <form name="itemForm" novalidate>
+  <div layout="column">
+    <form name="itemForm"
+          style="margin-top: 20px;"
+          novalidate>
 
-      <div>
-        <div>
-          <input id="item-title"
-                 name="item-title"
-                 placeholder="let's do something"
-                 type="text"
-                 ng-model="newItem.title"
-                 ng-required="true">
-          <label for="item-title">Add an item</label>
+      <md-input-container>
+        <input name="title"
+               aria-label="title"
+               ng-model="newItem.title"
+               required
+               placeholder="Add an item">
+
+        <div ng-messages="itemForm.title.$error" ng-if="itemForm.title.$dirty">
+          <div ng-message="required">required...</div>
         </div>
-      </div>
+      </md-input-container>
 
-      <btn type="btn" ng-click="createItem(newItem, itemForm)">
-        Create
-      </btn>
+      <md-button class="md-fab md-primary" aria-label="Add an item"
+                 ng-disabled="itemForm.$invalid || isSaving"
+                 ng-click="createItem(newItem, itemForm)">
+        <md-icon md-font-icon="save"></md-icon>
+        <!--<md-icon md-svg-src="save"></md-icon>-->
+      </md-button>
+
     </form>
+  </div>
 
+  <div layout="row">
     <div ng-repeat="item in items">
       {{ item.title }} {{ item.isDone }}
     </div>

@@ -4,19 +4,27 @@
   angular.module('checklistApp')
     .controller('ItemController', ItemController);
 
-  function ItemController($scope, $http) {
+  function ItemController ($scope, $http, $timeout) {
 
-    $scope.newItem = {
-      isDone: false
-    };
+    var self = this;
+    self.getNewItem = getNewItem;
 
     $scope.createItem = createItem;
     $scope.fetchItems = fetchItems;
 
+    // init
+    $scope.newItem = self.getNewItem();
     fetchItems();
 
 
-    function fetchItems() {
+    function getNewItem () {
+      return {
+        title: '',
+        isDone: false
+      };
+    }
+
+    function fetchItems () {
 
       return $http.get('/items/')
         .then(function (response) {
@@ -27,17 +35,31 @@
     }
 
 
-    function createItem(newItem, form) {
-      
+    function createItem (newItem, form) {
+
       if (form.$invalid) {
-        form['item-title'].$dirty = true;
+        form.title.$dirty = true;
         return;
       }
-      
+
+      $scope.isSaving = true;
+
       return $http.post('/items/', newItem)
+
         .then(function () {
-          $scope.newItem.title = '';
+
+          $timeout(function () {
+
+            $scope.newItem = getNewItem();
+            form.$setPristine();
+
+          }, 300);
+
           return fetchItems();
+        })
+
+        .finally(function () {
+          $scope.isSaving = false;
         });
     }
 
