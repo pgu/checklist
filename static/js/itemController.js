@@ -4,7 +4,7 @@
   angular.module('checklistApp')
     .controller('ItemController', ItemController);
 
-  function ItemController ($scope, $http, $timeout) {
+  function ItemController ($scope, $http, $timeout, $mdToast, $q) {
 
     var self = this;
     self.getNewItem = getNewItem;
@@ -64,9 +64,10 @@
     function onChangeItem (item) {
       return $http.put('/items/' + item.id, item)
         .then(function () {
-
+          $mdToast.showSimple('\u2713  ' + item.title);
         })
         .catch(function () {
+          $mdToast.showSimple('\u274C  Could not be updated: ' + item.title);
           item.isDone != item.isDone;
         });
     }
