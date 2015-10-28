@@ -12,6 +12,7 @@
     $scope.createItem = createItem;
     $scope.fetchItems = fetchItems;
     $scope.onChangeItem = onChangeItem;
+    $scope.deleteDoneItems = deleteDoneItems;
 
     // init
     $scope.newItem = self.getNewItem();
@@ -71,6 +72,26 @@
           $mdToast.showSimple('\u274C  Could not be updated: ' + item.title);
           item.isDone != item.isDone;
         });
+    }
+
+    function deleteDoneItems (items) {
+
+      var deletePromises = _(items)
+        .filter({ 'isDone': true })
+        .map(function (item) {
+          return $http.delete('/items/' + item.id);
+        })
+        .value();
+
+      $q.all(deletePromises)
+        .then(function () {
+          $mdToast.showSimple('\u2713  Cleaning has been done');
+        })
+        .then(fetchItems)
+        .catch(function () {
+          $mdToast.showSimple('\u274C  Could not delete items');
+        });
+
     }
 
   }
