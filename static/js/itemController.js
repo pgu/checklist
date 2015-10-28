@@ -38,7 +38,7 @@
     }
 
 
-    function createItem (newItem, form) {
+    function createItem (newItem, form, items) {
 
       if (form.$invalid) {
         form.title.$dirty = true;
@@ -49,14 +49,22 @@
 
       return $http.post('/items/', newItem)
 
-        .then(function () {
+        .then(function (response) {
+
+          var strItemId = _.last(response.headers().location.split('/'));
+          var itemId = _.parseInt(strItemId);
+
+          var item = _.cloneDeep(newItem);
+          item.id = itemId;
+          items.push(item);
+
+          $scope.items = _.sortBy(items, 'title');
 
           $scope.newItem = getNewItem();
           form.$setPristine();
           form.$setUntouched();
 
         })
-        .then(fetchItems)
 
         .finally(function () {
           $scope.isSaving = false;
@@ -77,7 +85,7 @@
     function deleteDoneItems (items) {
 
       var deletePromises = _(items)
-        .filter({ 'isDone': true })
+        .filter({ isDone: true })
         .map(function (item) {
           return $http.delete('/items/' + item.id);
         })
@@ -85,11 +93,10 @@
 
       $q.all(deletePromises)
         .then(function () {
-          $mdToast.showSimple('\u2713  Cleaning has been done');
+          $scope.items = _.filter(items, { isDone: false });
         })
-        .then(fetchItems)
         .catch(function () {
-          $mdToast.showSimple('\u274C  Could not delete items');
+          return fetchItems();
         });
 
     }
