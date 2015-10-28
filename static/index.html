@@ -13,21 +13,25 @@
 
 <body ng-cloak>
 
-<div class="container">
+<div>
 
-  <div class="row" ng-controller="ItemController">
-    <form name="itemForm" class="col s12" novalidate>
+  <div ng-controller="ItemController">
+    <form name="itemForm" novalidate>
 
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="item-title" name="item-title" placeholder="let's do something" type="text" ng-model="newItem.title"
+      <div>
+        <div>
+          <input id="item-title"
+                 name="item-title"
+                 placeholder="let's do something"
+                 type="text"
+                 ng-model="newItem.title"
                  ng-required="true">
           <label for="item-title">Add an item</label>
         </div>
       </div>
 
-      <btn class="btn btn-large btn-floating" type="submit" ng-click="createItem(newItem, itemForm)">
-        <i class="material-icons">add</i>
+      <btn type="btn" ng-click="createItem(newItem, itemForm)">
+        Create
       </btn>
     </form>
 
