@@ -46,11 +46,16 @@
 
   <div layout="column">
 
-    <div ng-repeat="item in items">
-      <md-switch ng-model="item.isDone" aria-label="is done?">
-        {{ item.title }}
-      </md-switch>
-    </div>
+    <md-list>
+      <md-list-item ng-repeat="item in items">
+
+        <md-switch ng-model="item.isDone" aria-label="is done?"
+                   ng-change="onChangeItem(item)">
+          {{ item.title }}
+        </md-switch>
+
+      </md-list-item>
+    </md-list>
 
   </div>
 

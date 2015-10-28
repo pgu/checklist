@@ -11,6 +11,7 @@
 
     $scope.createItem = createItem;
     $scope.fetchItems = fetchItems;
+    $scope.onChangeItem = onChangeItem;
 
     // init
     $scope.newItem = self.getNewItem();
@@ -57,6 +58,16 @@
 
         .finally(function () {
           $scope.isSaving = false;
+        });
+    }
+
+    function onChangeItem (item) {
+      return $http.put('/items/' + item.id, item)
+        .then(function () {
+
+        })
+        .catch(function () {
+          item.isDone != item.isDone;
         });
     }
 
