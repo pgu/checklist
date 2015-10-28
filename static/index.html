@@ -45,9 +45,11 @@
   </div>
 
   <div layout="column">
-    
+
     <div ng-repeat="item in items">
-      {{ item.title }} {{ item.isDone }}
+      <md-switch ng-model="item.isDone" aria-label="is done?">
+        {{ item.title }}
+      </md-switch>
     </div>
 
   </div>
