@@ -34,11 +34,10 @@
         </div>
       </md-input-container>
 
-      <md-button class="md-fab md-primary" aria-label="Add an item"
+      <md-button class="md-fab md-primary md-button" aria-label="Add an item"
                  ng-disabled="itemForm.$invalid || isSaving"
                  ng-click="createItem(newItem, itemForm)">
-        <md-icon md-font-icon="save"></md-icon>
-        <!--<md-icon md-svg-src="save"></md-icon>-->
+        <md-icon md-font-library="material-icons">save</md-icon>
       </md-button>
 
     </form>
