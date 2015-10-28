@@ -16,6 +16,8 @@ handlers:
   static_dir: static/styles
 - url: /images
   static_dir: static/images
+- url: /bower_components
+  static_dir: static/bower_components
 
 - url: /.*
   script: _go_app
