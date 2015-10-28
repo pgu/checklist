@@ -13,6 +13,9 @@
     $scope.createItem = createItem;
     $scope.fetchItems = fetchItems;
 
+    fetchItems();
+
+
     function fetchItems() {
 
       return $http.get('/items/')
@@ -24,7 +27,13 @@
     }
 
 
-    function createItem(newItem) {
+    function createItem(newItem, form) {
+      
+      if (form.$invalid) {
+        form['item-title'].$dirty = true;
+        return;
+      }
+      
       return $http.post('/items/', newItem)
         .then(function () {
           $scope.newItem.title = '';

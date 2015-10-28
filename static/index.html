@@ -12,30 +12,32 @@
 </head>
 
 <!--class="blue-grey lighten-2"-->
+
 <body ng-cloak>
 
   <div class="container">
 
     <div class="row" ng-controller="ItemController">
-      
-      <form class="col s12" novalidate>
+      <form name="itemForm" class="col s12" novalidate>
 
         <div class="row">
           <div class="input-field col s12">
-            <input id="item-title" placeholder="let's do something" type="text" class="validate"
-              ng-model="newItem.title">
+            <input id="item-title" name="item-title" placeholder="let's do something" type="text" ng-model="newItem.title" ng-required="true">
             <label for="item-title">Add an item</label>
           </div>
         </div>
-      
-      
-      <a class="waves-effect waves-light btn"
-         ng-click="createItem(newItem)">Create</a>
-         
-      <div ng-repeat="item in items">
-        {{ item.title }} {{ item.isDone }}
-      </div>
+
+        <btn class="btn" ng-click="createItem(newItem, itemForm)">
+          Create
+        </btn>
+
+        <div ng-repeat="item in items">
+          {{ item.title }} {{ item.isDone }}
+        </div>
+        
+      </form>      
     </div>
+    
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
