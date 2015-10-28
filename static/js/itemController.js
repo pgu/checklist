@@ -29,7 +29,7 @@
 
       return $http.get('/items/')
         .then(function (response) {
-          
+
           var items = response.data;
           $scope.items = _.sortBy(items, 'title');
         });
