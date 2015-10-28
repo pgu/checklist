@@ -46,20 +46,22 @@
 
   <div layout="column">
 
-    <md-list>
-      <md-list-item ng-repeat="item in items">
+    <md-content>
+      <md-list>
+        <md-list-item ng-repeat="item in items">
 
-        <md-switch ng-model="item.isDone" aria-label="is done?"
-                   ng-change="onChangeItem(item)">
-          {{ item.title }}
-        </md-switch>
+          <md-switch ng-model="item.isDone" aria-label="is done?"
+                     ng-change="onChangeItem(item)">
+            {{ item.title }}
+          </md-switch>
 
-      </md-list-item>
-    </md-list>
+        </md-list-item>
+      </md-list>
+    </md-content>
 
     <div>
       <md-button class="md-fab md-primary md-hue-2 md-button" aria-label="Delete done items"
-                 style="float: right"
+                 style="position: fixed; right: 10px; bottom: 50px;"
                  ng-if="items.length"
                  ng-click="deleteDoneItems(items)">
         <md-icon md-font-library="material-icons">clear</md-icon>

@@ -8,6 +8,8 @@
 
     var self = this;
     self.getNewItem = getNewItem;
+    self.successToast = successToast;
+    self.failToast = failToast;
 
     $scope.createItem = createItem;
     $scope.fetchItems = fetchItems;
@@ -64,6 +66,11 @@
           form.$setPristine();
           form.$setUntouched();
 
+          successToast('Added: ' + item.title);
+        })
+
+        .catch(function () {
+          failToast('Could not add: ' + item.title)
         })
 
         .finally(function () {
@@ -74,10 +81,10 @@
     function onChangeItem (item) {
       return $http.put('/items/' + item.id, item)
         .then(function () {
-          $mdToast.showSimple('\u2713  ' + item.title);
+          successToast('Updated: ' + item.title);
         })
         .catch(function () {
-          $mdToast.showSimple('\u274C  Could not be updated: ' + item.title);
+          failToast('Could not update: ' + item.title);
           item.isDone != item.isDone;
         });
     }
@@ -94,11 +101,22 @@
       $q.all(deletePromises)
         .then(function () {
           $scope.items = _.filter(items, { isDone: false });
+
+          successToast('Deleted');
         })
         .catch(function () {
+          failToast('Could not delete');
           return fetchItems();
         });
 
+    }
+
+    function successToast (message) {
+      $mdToast.showSimple('\u2713  ' + message);
+    }
+
+    function failToast (message) {
+      $mdToast.showSimple('\u274C  ' + message);
     }
 
   }
