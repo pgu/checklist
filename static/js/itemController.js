@@ -48,15 +48,12 @@
 
         .then(function () {
 
-          $timeout(function () {
+          $scope.newItem = getNewItem();
+          form.$setPristine();
+          form.$setUntouched();
 
-            $scope.newItem = getNewItem();
-            form.$setPristine();
-
-          }, 300);
-
-          return fetchItems();
         })
+        .then(fetchItems)
 
         .finally(function () {
           $scope.isSaving = false;
